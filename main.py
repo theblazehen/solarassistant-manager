@@ -3,6 +3,7 @@ import math
 import time
 from enum import Enum
 import paho.mqtt.client as mqtt
+import os
 
 """
 This script controls the charging logic based on the state of charge (SOC) and
@@ -130,5 +131,5 @@ client = mqtt.Client(client_id="SolarChargerController")
 client.on_connect = on_connect
 client.on_message = on_message
 
-client.connect("solar-assistant")
+client.connect(os.environ.get("SOLARASSISTANT_HOST", "solar-assistant"))
 client.loop_forever()
